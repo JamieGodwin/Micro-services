@@ -3,6 +3,7 @@
 - Each microservice focuses on a specific buisness capability and communicates with other services through API's.
 - They can be used break down complex applications, scale individual services and for continuous integration, deployment and delivery. 
 
+![](1.1.png)
 ## Who uses it in the industry?
 - Netflix use it instead of monolith to handle specific tasks like reccomendations, authentification and streaming. 
 - Amazon use it for services like AWS, prime and marketplace. 
