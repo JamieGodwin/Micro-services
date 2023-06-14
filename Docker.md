@@ -60,3 +60,55 @@ docker push jamie-tech230-nginx/tech230-jamie
 ```
 where `jamie-tech230-nginx` is the repo name on dockerhub.
 - Note: Port 80 must be free in order for it to run.
+
+## MongoDB version 4
+- In a Dockerfile, add:
+```
+From mongo:4.4
+Expose 27017
+CMD ["mongod"]
+```
+- We then need to build this, and then push it to Docker hub.
+
+## Setting up node
+- To install node, we make another Dockerfile:
+```
+FROM node:16
+LABEL MAINTAINER=Esther@Sparta
+WORKDIR /app
+COPY app .
+EXPOSE 3000
+RUN npm install
+CMD ["npm", "start", "daemon off;"]
+```
+- This can then be built and pushed to Docker hub
+
+## Composing the two together
+- In order for the app to talk to the database, they must be connected.
+- This is done by composing the two.
+- We enter the command `nano docker-compose.yml` as this will be done in Yaml.
+- The following commands are then added:
+```
+version: '3.1'
+services:
+  app:
+    image: jamiegodwin1/jamie-tech230-nginx:node
+    restart: always
+    ports:
+      - 3000:3000
+    depends_on:
+      - database
+    environment:
+      - DB_HOST=database:27017/posts
+    command:
+      sh -c "npm install && npm start"
+  database:
+    image: jamiegodwin1/mongodb4:latest
+    restart: always
+    ports:
+      - 27017:27017
+```
+- The command `docker compose up`
+- It should look like this:
+
+![](1.2.png)
