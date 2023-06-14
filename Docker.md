@@ -61,6 +61,8 @@ docker push jamie-tech230-nginx/tech230-jamie
 where `jamie-tech230-nginx` is the repo name on dockerhub.
 - Note: Port 80 must be free in order for it to run.
 
+![](1.3.png)
+
 ## MongoDB version 4
 - In a Dockerfile, add:
 ```
